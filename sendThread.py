@@ -15,6 +15,8 @@ class sender(threading.Thread):
 	def __init__(self, inQueue, outQueue, args=(), kwargs=None):
 		global outputDir
 		threading.Thread.__init__(self, args=(), kwargs=None)
+		self.addr = args[2]
+		self.passwd = args[3]
 		self.inQueue = inQueue
 		self.outQueue = outQueue
 		self.daemon = False
@@ -44,7 +46,7 @@ class sender(threading.Thread):
 				print(threading.currentThread().getName() + " zipping and sending")
 				fileName = sender.getZipName()
 				zip.run(outputDir, fileName)
-				sendMail.sendData(fileName)
+				sendMail.sendData(fileName, self.addr, self.passwd)
 				print(threading.currentThread().getName() + " zipped and sent")
 				os.remove(fileName)
 				self.outQueue.put("done")

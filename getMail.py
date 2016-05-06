@@ -6,10 +6,6 @@ import datetime
 import os
 
 outputDir = "updates/"
-
-# Use 'INBOX' to read inbox.  Note that whatever folder is specified, 
-# after successfully running this script all emails in that folder 
-# will be marked as read.
 EMAIL_FOLDER = "INBOX"
 
 class Mail():
@@ -19,6 +15,9 @@ class Mail():
 	outputDir = "/updates"
 	M = None
 	def __init__(self, usern, pas):
+		"""
+		Initaize the mail class to use the username and password provided
+		"""
 		global EMAIL_ACCOUNT
 		global password
 		global M
@@ -42,8 +41,8 @@ class Mail():
 
 	def process_mailbox(self):
 		"""
-		Do something with emails messages in the folder.  
-		For the sake of this example, print some headers.
+		This method will get the body and attachments of any email
+		that has the subject "action"
 		"""
 		action = ""
 		rv, data = M.search(None, "ALL")

