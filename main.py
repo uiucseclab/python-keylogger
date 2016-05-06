@@ -114,11 +114,18 @@ if __name__ == '__main__':
 		elif "stop" in action:
 			print("force quit")
 			stop = True
+		elif "capture" in action:
+			screenTh.queue.put("capture")
 		elif "move" in action:
 			a, xS, yS = action.split()
 			x = int(xS)
 			y = int(yS)
 			mouse.moveMouse(x,y)
+		elif "click" in action:
+			a, xS, yS = action.split()
+			x = int(xS)
+			y = int(yS)
+			mouse.click(x,y)
 		elif "update" in action:
 			sendTh.inQueue.put("quit")
 			screenTh.queue.put("quit")
