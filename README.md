@@ -1,6 +1,6 @@
 # python-keylogger
 
-Windows keylogger for my security lab project using python 3.4.
+Windows keylogger for my security lab project using python 3.4. Netid: Schunk2
 
 The program implements multithreading to simultaneously log keypresses, take screenshots, and send/receive data via an email account specified in main.py.  
 To start the program, run runme.cmd. This will download and update any required libraries (provided python is already installed on the victim machine).  The program will then begin to record keypresses, take screenshots and save them in their respective output directories. After a desired interval (default is 2 hours) the key logging and screen capturing threads will pause, all current output will be zipped, emailed and deleted. Key logging and screen capturing will subsequently resume. 
